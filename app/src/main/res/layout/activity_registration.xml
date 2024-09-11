@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/white">
+
+    <!-- Cover Logo at the Top -->
+    <ImageView
+        android:id="@+id/logoImageView"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
+        android:src="@drawable/logo"
+        android:contentDescription="@string/logo_description"
+        android:scaleType="fitCenter" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/logoImageView">
+
+        <EditText
+            android:id="@+id/nameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Name"
+            android:inputType="text"
+            android:padding="12dp"
+            android:background="@drawable/edittext_rounded_background" />
+
+        <EditText
+            android:id="@+id/emailEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:padding="12dp"
+            android:background="@drawable/edittext_rounded_background" />
+
+        <EditText
+            android:id="@+id/passwordEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:padding="12dp"
+            android:background="@drawable/edittext_rounded_background" />
+
+        <EditText
+            android:id="@+id/mobileEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Mobile Number"
+            android:inputType="phone"
+            android:padding="12dp"
+            android:background="@drawable/edittext_rounded_background" />
+
+        <Spinner
+            android:id="@+id/stateSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:spinnerMode="dropdown"
+            android:background="@drawable/edittext_rounded_background"
+            android:padding="12dp" />
+
+        <EditText
+            android:id="@+id/collegeEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="College Name"
+            android:inputType="text"
+            android:padding="12dp"
+            android:background="@drawable/edittext_rounded_background" />
+
+        <Button
+            android:id="@+id/registerButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Register"
+            android:textColor="@android:color/white"
+            android:background="@drawable/button_rounded_background"
+            android:padding="12dp" />
+
+        <!-- Back to Login Button -->
+        <TextView
+            android:id="@+id/backToLoginTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Back to Login"
+            android:textColor="@color/colorPrimary"
+            android:layout_gravity="center_horizontal"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="12dp" />
+
+    </LinearLayout>
+
+</RelativeLayout>

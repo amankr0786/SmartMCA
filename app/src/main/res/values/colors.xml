@@ -2,4 +2,16 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <!-- Define your color blue here -->
+    <color name="blue">#2196F3</color> <!-- Example of a blue color -->
+
+    <!-- Other colors -->
+    <color name="pink">#E91E63</color>
+    <color name="colorPrimary">#6200EE</color> <!-- Example color, adjust as needed -->
+    <color name="colorAccent">#03DAC5</color> <!-- Example color, adjust as needed -->
+    <color name="register_text_color">#FF4081</color> <!-- Example color (Pink) -->
+
+
+
+    <!-- Add any other colors your app needs -->
 </resources>
