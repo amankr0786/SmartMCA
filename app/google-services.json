@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "53772127329",
+    "project_id": "smart-mca",
+    "storage_bucket": "smart-mca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:53772127329:android:05cca65d71054015ec6e20",
+        "android_client_info": {
+          "package_name": "com.study.smartmca"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD25cr5EOUt41PgsfRBHdaQw7jEGRXNWzY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
