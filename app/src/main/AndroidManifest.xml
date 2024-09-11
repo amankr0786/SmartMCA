@@ -28,6 +28,7 @@
         <activity android:name=".RegistrationActivity"
             android:exported="false" /> <!-- Make sure this entry is included -->
         <!-- Add android:exported attribute -->
+        <activity android:name=".ForgotPasswordActivity" />
 
     </application>
 

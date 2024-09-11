@@ -21,7 +21,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText emailEditText, passwordEditText;
     private Button loginButton;
-    private TextView registerTextView;
+    private TextView registerTextView, forgotPasswordTextView;
     private FirebaseAuth mAuth;
     private static final String PREFS_NAME = "SmartMCA_Prefs";
     private static final String PREF_LOGGED_IN = "isLoggedIn";
@@ -37,6 +37,7 @@ public class LoginActivity extends AppCompatActivity {
         passwordEditText = findViewById(R.id.passwordEditText);
         loginButton = findViewById(R.id.loginButton);
         registerTextView = findViewById(R.id.registerTextView);
+        forgotPasswordTextView = findViewById(R.id.forgotPasswordButton); // Use the correct ID for Forgot Password Button
 
         // Real-time Email Validation
         emailEditText.addTextChangedListener(new TextWatcher() {
@@ -97,6 +98,11 @@ public class LoginActivity extends AppCompatActivity {
 
         registerTextView.setOnClickListener(v -> {
             Intent intent = new Intent(LoginActivity.this, RegistrationActivity.class);
+            startActivity(intent);
+        });
+
+        forgotPasswordTextView.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
             startActivity(intent);
         });
     }
