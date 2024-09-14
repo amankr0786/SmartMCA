@@ -33,12 +33,22 @@ android {
 }
 
 dependencies {
-
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
     implementation(libs.firebase.auth)
+
+    // Add Google Sign-In dependency
+    implementation(libs.google.android.gms.play.services.auth)
+
+    // Add Firebase BoM
+    implementation(platform(libs.firebase.bom))
+
+    // Add other Firebase products you might need
+    implementation(libs.firebase.analytics)
+    // Add LoadingButton library
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
