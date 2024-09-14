@@ -1,5 +1,7 @@
 package com.study.smartmca;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -8,7 +10,9 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +27,9 @@ public class RegistrationActivity extends AppCompatActivity {
     private Spinner stateSpinner;
     private Button registerButton;
     private TextView backToLoginTextView;
+    private CheckBox termsCheckBox;
+    private ImageView showPasswordImageView;
+    private boolean isPasswordVisible = false;
     private FirebaseAuth mAuth;
 
     @Override
@@ -40,6 +47,8 @@ public class RegistrationActivity extends AppCompatActivity {
         collegeEditText = findViewById(R.id.collegeEditText);
         registerButton = findViewById(R.id.registerButton);
         backToLoginTextView = findViewById(R.id.backToLoginTextView);
+        termsCheckBox = findViewById(R.id.termsCheckBox);
+        showPasswordImageView = findViewById(R.id.showPasswordImageView);
 
         // Populate state spinner with Indian states
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -89,6 +98,19 @@ public class RegistrationActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) { }
         });
 
+        // Toggle password visibility
+        showPasswordImageView.setOnClickListener(v -> {
+            if (isPasswordVisible) {
+                passwordEditText.setInputType(android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                showPasswordImageView.setImageResource(R.drawable.ic_eye_off);
+            } else {
+                passwordEditText.setInputType(android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                showPasswordImageView.setImageResource(R.drawable.ic_eye);
+            }
+            passwordEditText.setSelection(passwordEditText.getText().length());
+            isPasswordVisible = !isPasswordVisible;
+        });
+
         registerButton.setOnClickListener(v -> {
             String name = nameEditText.getText().toString().trim();
             String email = emailEditText.getText().toString().trim();
@@ -103,7 +125,10 @@ public class RegistrationActivity extends AppCompatActivity {
             }
 
             // Perform final validation before registration
-            if (!validateEmail() || !validatePassword() || !validateMobileNumber()) {
+            if (!validateEmail() || !validatePassword() || !validateMobileNumber() || !termsCheckBox.isChecked()) {
+                if (!termsCheckBox.isChecked()) {
+                    Toast.makeText(RegistrationActivity.this, "You must agree to the Terms and Conditions.", Toast.LENGTH_SHORT).show();
+                }
                 return;
             }
 
@@ -154,5 +179,14 @@ public class RegistrationActivity extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+
+    public void showTermsPopup(View view) {
+        new AlertDialog.Builder(this)
+                .setTitle("Terms and Conditions")
+                .setMessage(getString(R.string.terms_and_conditions))
+                .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
+                .create()
+                .show();
     }
 }

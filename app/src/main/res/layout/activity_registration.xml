@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,14 +7,14 @@
     <!-- Cover Logo at the Top -->
     <ImageView
         android:id="@+id/logoImageView"
-        android:layout_width="230dp"
-        android:layout_height="230dp"
+        android:layout_width="290dp"
+        android:layout_height="90dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="24dp"
         android:layout_marginBottom="16dp"
-        android:src="@drawable/logo"
         android:contentDescription="@string/logo_description"
-        android:scaleType="fitCenter" />
+        android:scaleType="fitCenter"
+        android:src="@drawable/logo" />
 
     <!-- Registration Title -->
     <TextView
@@ -25,75 +24,221 @@
         android:layout_below="@id/logoImageView"
         android:layout_centerHorizontal="true"
         android:text="Registration"
-        android:textSize="24sp"
-        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textColor="@color/customButtonColor"
         android:textStyle="bold"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Description TextView -->
+    <TextView
+        android:id="@+id/descriptionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/titleTextView"
+        android:layout_centerHorizontal="true"
+        android:text="Get Started by creating a free account."
+        android:textSize="16sp"
+        android:textColor="@color/black"
         android:layout_marginBottom="24dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_below="@id/titleTextView">
+        android:layout_below="@id/descriptionTextView">
 
-        <EditText
-            android:id="@+id/nameEditText"
+        <!-- Name Field with User Icon -->
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Name"
-            android:inputType="text"
-            android:padding="12dp"
-            android:background="@drawable/edittext_rounded_background" />
+            android:layout_marginBottom="16dp">
 
-        <EditText
-            android:id="@+id/emailEditText"
+            <EditText
+                android:id="@+id/nameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Name"
+                android:inputType="text"
+                android:padding="12dp"
+                android:background="@drawable/edittext_rounded_background"
+                android:layout_toStartOf="@+id/userIcon"
+                android:layout_marginEnd="40dp" />
+
+            <ImageView
+                android:id="@+id/userIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/ic_user"
+                android:contentDescription="@string/user_icon_desc" />
+        </RelativeLayout>
+
+        <!-- Email Field with Email Icon -->
+        <RelativeLayout
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
+
+            <EditText
+                android:id="@+id/emailEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:padding="12dp"
+                android:background="@drawable/edittext_rounded_background"
+                android:layout_toStartOf="@+id/emailIcon"
+                android:layout_marginEnd="40dp" />
+
+            <ImageView
+                android:id="@+id/emailIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/ic_email"
+                android:contentDescription="@string/email_icon_desc" />
+        </RelativeLayout>
+
+        <!-- Password Field with Eye Icon -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
+
+            <EditText
+                android:id="@+id/passwordEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:padding="12dp"
+                android:background="@drawable/edittext_rounded_background"
+                android:layout_toStartOf="@+id/showPasswordImageView"
+                android:layout_marginEnd="40dp" />
+
+            <ImageView
+                android:id="@+id/showPasswordImageView"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/ic_eye"
+                android:contentDescription="@string/show_password" />
+        </RelativeLayout>
+
+        <!-- Mobile Number Field with Mobile Icon -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
+
+            <EditText
+                android:id="@+id/mobileEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Mobile Number"
+                android:inputType="phone"
+                android:padding="12dp"
+                android:background="@drawable/edittext_rounded_background"
+                android:layout_toStartOf="@+id/mobileIcon"
+                android:layout_marginEnd="40dp" />
+
+            <ImageView
+                android:id="@+id/mobileIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/ic_mobile"
+                android:contentDescription="@string/mobile_icon_desc" />
+        </RelativeLayout>
+
+        <!-- State Spinner with State Icon -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
+
+            <Spinner
+                android:id="@+id/stateSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dropdown"
+                android:background="@drawable/edittext_rounded_background"
+                android:padding="12dp"
+                android:layout_toStartOf="@+id/stateIcon"
+                android:layout_marginEnd="40dp" />
+
+            <ImageView
+                android:id="@+id/stateIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/ic_state"
+                android:contentDescription="@string/state_icon_desc" />
+        </RelativeLayout>
+
+        <!-- College Name Field with College Icon -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
+
+            <EditText
+                android:id="@+id/collegeEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="College Name"
+                android:inputType="text"
+                android:padding="12dp"
+                android:background="@drawable/edittext_rounded_background"
+                android:layout_toStartOf="@+id/collegeIcon"
+                android:layout_marginEnd="40dp" />
+
+            <ImageView
+                android:id="@+id/collegeIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/ic_college"
+                android:contentDescription="@string/college_icon_desc" />
+        </RelativeLayout>
+
+        <!-- Terms and Conditions Checkbox -->
+        <CheckBox
+            android:id="@+id/termsCheckBox"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:hint="Email"
-            android:inputType="textEmailAddress"
-            android:padding="12dp"
-            android:background="@drawable/edittext_rounded_background" />
-
-        <EditText
-            android:id="@+id/passwordEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:padding="12dp"
-            android:background="@drawable/edittext_rounded_background" />
-
-        <EditText
-            android:id="@+id/mobileEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:hint="Mobile Number"
-            android:inputType="phone"
-            android:padding="12dp"
-            android:background="@drawable/edittext_rounded_background" />
-
-        <Spinner
-            android:id="@+id/stateSpinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:spinnerMode="dropdown"
-            android:background="@drawable/edittext_rounded_background"
+            android:text="I agree to the Terms and Conditions"
             android:padding="12dp" />
 
-        <EditText
-            android:id="@+id/collegeEditText"
-            android:layout_width="match_parent"
+        <!-- Terms and Conditions Link -->
+        <TextView
+            android:id="@+id/termsLinkTextView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:hint="College Name"
-            android:inputType="text"
+            android:layout_marginTop="8dp"
+            android:text="Terms and Conditions"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp"
+            android:layout_gravity="center_horizontal"
+            android:clickable="true"
+            android:focusable="true"
             android:padding="12dp"
-            android:background="@drawable/edittext_rounded_background" />
+            android:onClick="showTermsPopup" />
 
+        <!-- Register Button -->
         <Button
             android:id="@+id/registerButton"
             android:layout_width="match_parent"
@@ -104,13 +249,14 @@
             android:background="@drawable/button_rounded_background"
             android:padding="12dp" />
 
-        <!-- Back to Login Button -->
+        <!-- Back to Login TextView -->
         <TextView
             android:id="@+id/backToLoginTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Back to Login"
+            android:text="Already a member? Log In"
+            android:textSize="16sp"
             android:textColor="@color/colorPrimary"
             android:layout_gravity="center_horizontal"
             android:clickable="true"

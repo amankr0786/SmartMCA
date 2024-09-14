@@ -8,7 +8,9 @@ import android.text.TextWatcher;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,22 +24,36 @@ public class LoginActivity extends AppCompatActivity {
     private EditText emailEditText, passwordEditText;
     private Button loginButton;
     private TextView registerTextView, forgotPasswordTextView;
+    private ImageView showPasswordImageView;
+    private CheckBox rememberMeCheckBox;
     private FirebaseAuth mAuth;
+    private boolean isPasswordVisible = false;
+
     private static final String PREFS_NAME = "SmartMCA_Prefs";
     private static final String PREF_LOGGED_IN = "isLoggedIn";
+    private static final String PREF_REMEMBER_ME = "rememberMe";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
+        // Initialize UI elements
         emailEditText = findViewById(R.id.emailEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
         loginButton = findViewById(R.id.loginButton);
         registerTextView = findViewById(R.id.registerTextView);
-        forgotPasswordTextView = findViewById(R.id.forgotPasswordButton); // Use the correct ID for Forgot Password Button
+        forgotPasswordTextView = findViewById(R.id.forgotPasswordButton);
+        showPasswordImageView = findViewById(R.id.showPasswordImageView);
+        rememberMeCheckBox = findViewById(R.id.rememberMeCheckBox);
+
+        // Load "Remember Me" state
+        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        boolean rememberMe = preferences.getBoolean(PREF_REMEMBER_ME, false);
+        rememberMeCheckBox.setChecked(rememberMe);
 
         // Real-time Email Validation
         emailEditText.addTextChangedListener(new TextWatcher() {
@@ -62,6 +78,19 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        // Toggle password visibility when eye icon is clicked
+        showPasswordImageView.setOnClickListener(v -> {
+            if (isPasswordVisible) {
+                passwordEditText.setInputType(129); // InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD
+                showPasswordImageView.setImageResource(R.drawable.ic_eye); // Eye icon
+            } else {
+                passwordEditText.setInputType(1); // InputType.TYPE_CLASS_TEXT
+                showPasswordImageView.setImageResource(R.drawable.ic_eye_off); // Eye-off icon
+            }
+            passwordEditText.setSelection(passwordEditText.getText().length()); // Move cursor to end
+            isPasswordVisible = !isPasswordVisible;
+        });
+
         loginButton.setOnClickListener(v -> {
             String email = emailEditText.getText().toString().trim();
             String password = passwordEditText.getText().toString().trim();
@@ -81,9 +110,9 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             FirebaseUser user = mAuth.getCurrentUser();
                             if (user != null) {
-                                SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
                                 SharedPreferences.Editor editor = preferences.edit();
                                 editor.putBoolean(PREF_LOGGED_IN, true);
+                                editor.putBoolean(PREF_REMEMBER_ME, rememberMeCheckBox.isChecked());
                                 editor.apply();
 
                                 Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);

@@ -8,6 +8,17 @@
     <!-- Other string resources -->
     <string name="login">Login</string>
     <string name="register">Register</string>
+    <string name="show_password">Show password</string>
+    <string name="hide_password">Hide password</string>
+    <string name="email_icon_desc">Email Icon</string>
+    <string name="user_icon_desc">User Profile Icon</string>
+    <string name="mobile_icon_desc">Mobile Icon</string>
+    <string name="state_icon_desc">State Icon</string>
+    <string name="college_icon_desc">College Icon</string>
+    <string name="settings_button_desc">Setting Icon</string>
+
+
+
     <!-- Add any other strings your app needs -->
         <!-- Other strings -->
 
@@ -41,6 +52,65 @@
             <item>Uttarakhand</item>
             <item>West Bengal</item>
         </string-array>
+        <!-- Other string resources -->
+
+        <string name="terms_and_conditions">
+TERMS AND CONDITIONS
+
+Last updated September 11, 2024
+
+
+
+AGREEMENT TO OUR LEGAL TERMS
+
+We are Smart MCA ("Company," "we," "us," "our"), a company registered in India at Near ICEM, Pune, Maharashtra 201310.
+
+We operate the mobile application Smart MCA (the "App"), as well as any other related products and services that refer or link to these legal terms (the "Legal Terms") (collectively, the "Services").
+
+We provide seamless platform for study via Smart MCA
+
+You can contact us by phone at 9709349703, email at amankr0786@gmail.com, or by mail to Near ICEM, Pune, Maharashtra 201310,Â India.
+
+These Legal Terms constitute a legally binding agreement made between you, whether personally or on behalf of an entity ("you"), and Smart MCA, concerning your access to and use of the Services. You agree that by accessing the Services, you have read, understood, and agreed to be bound by all of these Legal Terms. IF YOU DO NOT AGREE WITH ALL OF THESE LEGAL TERMS, THEN YOU ARE EXPRESSLY PROHIBITED FROM USING THE SERVICES AND YOU MUST DISCONTINUE USE IMMEDIATELY.
+
+We will provide you with prior notice of any scheduled changes to the Services you are using. The modified Legal Terms will become effective upon posting or notifying you by amankr0786@gmail.com, as stated in the email message. By continuing to use the Services after the effective date of any changes, you agree to be bound by the modified terms.
+
+All users who are minors in the jurisdiction in which they reside (generally under the age of 18) must have the permission of, and be directly supervised by, their parent or guardian to use the Services. If you are a minor, you must have your parent or guardian read and agree to these Legal Terms prior to you using the Services.
+
+We recommend that you print a copy of these Legal Terms for your records.
+
+Our intellectual property
+
+We are the owner or the licensee of all intellectual property rights in our Services, including all source code, databases, functionality, software, website designs, audio, video, text, photographs, and graphics in the Services (collectively, the "Content"), as well as the trademarks, service marks, and logos contained therein (the "Marks").
+
+Our Content and Marks are protected by copyright and trademark laws (and various other intellectual property rights and unfair competition laws) and treaties in the United States and around the world.
+
+The Content and Marks are provided in or through the Services "AS IS" for your personal, non-commercial use only.
+Subject to your compliance with these Legal Terms, including the "PROHIBITED ACTIVITIES" section below, we grant you a non-exclusive, non-transferable, revocable license to:
+access the Services; and
+download or print a copy of any portion of the Content to which you have properly gained access.
+solely for your personal, non-commercial use.
+
+Except as set out in this section or elsewhere in our Legal Terms, no part of the Services and no Content or Marks may be copied, reproduced, aggregated, republished, uploaded, posted, publicly displayed, encoded, translated, transmitted, distributed, sold, licensed, or otherwise exploited for any commercial purpose whatsoever, without our express prior written permission.
+
+If you wish to make any use of the Services, Content, or Marks other than as set out in this section or elsewhere in our Legal Terms, please address your request to: amankr0786@gmail.com. If we ever grant you the permission to post, reproduce, or publicly display any part of our Services or Content, you must identify us as the owners or licensors of the Services, Content, or Marks and ensure that any copyright or proprietary notice appears or is visible on posting, reproducing, or displaying our Content.
+
+Any breach of these Intellectual Property Rights will constitute a material breach of our Legal Terms and your right to use our Services will terminate immediately.
+
+Your submissions
+
+Please review this section and the "PROHIBITED ACTIVITIES" section carefully prior to using our Services to understand the (a) rights you give us and (b) obligations you have when you post or upload any content through the Services.
+
+Submissions: By directly sending us any question, comment, suggestion, idea, feedback, or other information about the Services ("Submissions"), you agree to assign to us all intellectual property rights in such Submission. You agree that we shall own this Submission and be entitled to its unrestricted use and dissemination for any lawful purpose, commercial or otherwise, without acknowledgment or compensation to you.
+
+
+Smart MCA
+Near ICEM
+Pune, Maharashtra 201310
+India
+Phone: 9709349703
+amankr0786@gmail.com
+        </string>
 
 
 </resources>
