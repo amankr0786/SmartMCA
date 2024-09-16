@@ -101,7 +101,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     }
 
     private void updateTimerText() {
-        String timerText = "Resend link in " + timerSeconds + "s";
+        String timerText = "Wait to Resend link in " + timerSeconds + "s";
         timerTextView.setText(timerText);
     }
 }

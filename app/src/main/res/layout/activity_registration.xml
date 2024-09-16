@@ -27,7 +27,7 @@
         android:textSize="20sp"
         android:textColor="@color/customButtonColor"
         android:textStyle="bold"
-        android:layout_marginBottom="8dp" />
+        android:layout_marginBottom="12dp" />
 
     <!-- Description TextView -->
     <TextView
@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/titleTextView"
         android:layout_centerHorizontal="true"
-        android:text="Get Started by creating a free account."
+        android:text="Get started by creating a free account."
         android:textSize="16sp"
         android:textColor="@color/black"
         android:layout_marginBottom="24dp" />
@@ -51,7 +51,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="5dp">
 
             <EditText
                 android:id="@+id/nameEditText"
@@ -60,6 +60,7 @@
                 android:hint="Name"
                 android:inputType="text"
                 android:padding="12dp"
+                android:layout_marginStart="8dp"
                 android:background="@drawable/edittext_rounded_background"
                 android:layout_toStartOf="@+id/userIcon"
                 android:layout_marginEnd="40dp" />
@@ -88,6 +89,7 @@
                 android:hint="Email"
                 android:inputType="textEmailAddress"
                 android:padding="12dp"
+                android:layout_marginStart="8dp"
                 android:background="@drawable/edittext_rounded_background"
                 android:layout_toStartOf="@+id/emailIcon"
                 android:layout_marginEnd="40dp" />
@@ -116,6 +118,7 @@
                 android:hint="Password"
                 android:inputType="textPassword"
                 android:padding="12dp"
+                android:layout_marginStart="8dp"
                 android:background="@drawable/edittext_rounded_background"
                 android:layout_toStartOf="@+id/showPasswordImageView"
                 android:layout_marginEnd="40dp" />
@@ -144,6 +147,7 @@
                 android:hint="Mobile Number"
                 android:inputType="phone"
                 android:padding="12dp"
+                android:layout_marginStart="8dp"
                 android:background="@drawable/edittext_rounded_background"
                 android:layout_toStartOf="@+id/mobileIcon"
                 android:layout_marginEnd="40dp" />
@@ -172,6 +176,7 @@
                 android:spinnerMode="dropdown"
                 android:background="@drawable/edittext_rounded_background"
                 android:padding="12dp"
+                android:layout_marginStart="8dp"
                 android:layout_toStartOf="@+id/stateIcon"
                 android:layout_marginEnd="40dp" />
 
@@ -199,6 +204,7 @@
                 android:hint="College Name"
                 android:inputType="text"
                 android:padding="12dp"
+                android:layout_marginStart="8dp"
                 android:background="@drawable/edittext_rounded_background"
                 android:layout_toStartOf="@+id/collegeIcon"
                 android:layout_marginEnd="40dp" />
@@ -220,7 +226,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="I agree to the Terms and Conditions"
+            android:layout_marginStart="8dp"
+            android:text="I agree to the"
+            android:textSize="14sp"
             android:padding="12dp" />
 
         <!-- Terms and Conditions Link -->
@@ -228,10 +236,11 @@
             android:id="@+id/termsLinkTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="-42dp"
+            android:layout_marginStart="-6dp"
             android:text="Terms and Conditions"
             android:textColor="@color/colorPrimary"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:layout_gravity="center_horizontal"
             android:clickable="true"
             android:focusable="true"
@@ -243,7 +252,7 @@
             android:id="@+id/registerButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="8dp"
             android:text="Register"
             android:textColor="@android:color/white"
             android:background="@drawable/button_rounded_background"
@@ -254,10 +263,10 @@
             android:id="@+id/backToLoginTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:text="Already a member? Log In"
             android:textSize="16sp"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@android:color/holo_red_light"
             android:layout_gravity="center_horizontal"
             android:clickable="true"
             android:focusable="true"
