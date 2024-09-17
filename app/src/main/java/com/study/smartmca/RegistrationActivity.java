@@ -1,7 +1,5 @@
 package com.study.smartmca;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -17,9 +15,15 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class RegistrationActivity extends AppCompatActivity {
 
@@ -31,14 +35,21 @@ public class RegistrationActivity extends AppCompatActivity {
     private ImageView showPasswordImageView;
     private boolean isPasswordVisible = false;
     private FirebaseAuth mAuth;
+    private DatabaseReference databaseReference; // For Realtime Database
+    private LottieAnimationView loadingAnimation; // New loading animation view
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
+        // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
+        // Initialize Firebase Database Reference
+        databaseReference = FirebaseDatabase.getInstance().getReference("Users");
+
+        // Initialize UI elements
         nameEditText = findViewById(R.id.nameEditText);
         emailEditText = findViewById(R.id.emailEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
@@ -49,6 +60,7 @@ public class RegistrationActivity extends AppCompatActivity {
         backToLoginTextView = findViewById(R.id.backToLoginTextView);
         termsCheckBox = findViewById(R.id.termsCheckBox);
         showPasswordImageView = findViewById(R.id.showPasswordImageView);
+        loadingAnimation = findViewById(R.id.loadingAnimation); // Initialize loading animation view
 
         // Populate state spinner with Indian states
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -56,10 +68,31 @@ public class RegistrationActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         stateSpinner.setAdapter(adapter);
 
+        // Set up text watchers and password visibility toggle
+        setupTextWatchers();
+
+        // Set register button listener
+        registerButton.setOnClickListener(v -> {
+            registerUser();
+        });
+
+        // Handle Back to Login TextView click
+        backToLoginTextView.setOnClickListener(v -> {
+            startActivity(new Intent(RegistrationActivity.this, LoginActivity.class));
+            finish();
+        });
+
+        // Set up Terms and Conditions checkbox listener
+        termsCheckBox.setOnClickListener(v -> {
+            showTermsAndConditionsDialog();
+        });
+    }
+
+    private void setupTextWatchers() {
         // Real-time validation for email
         emailEditText.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -67,13 +100,13 @@ public class RegistrationActivity extends AppCompatActivity {
             }
 
             @Override
-            public void afterTextChanged(Editable s) { }
+            public void afterTextChanged(Editable s) {}
         });
 
         // Real-time validation for password
         passwordEditText.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -81,13 +114,13 @@ public class RegistrationActivity extends AppCompatActivity {
             }
 
             @Override
-            public void afterTextChanged(Editable s) { }
+            public void afterTextChanged(Editable s) {}
         });
 
         // Real-time validation for mobile number
         mobileEditText.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -95,7 +128,7 @@ public class RegistrationActivity extends AppCompatActivity {
             }
 
             @Override
-            public void afterTextChanged(Editable s) { }
+            public void afterTextChanged(Editable s) {}
         });
 
         // Toggle password visibility
@@ -110,48 +143,66 @@ public class RegistrationActivity extends AppCompatActivity {
             passwordEditText.setSelection(passwordEditText.getText().length());
             isPasswordVisible = !isPasswordVisible;
         });
+    }
 
-        registerButton.setOnClickListener(v -> {
-            String name = nameEditText.getText().toString().trim();
-            String email = emailEditText.getText().toString().trim();
-            String password = passwordEditText.getText().toString().trim();
-            String mobile = mobileEditText.getText().toString().trim();
-            String state = stateSpinner.getSelectedItem().toString();
-            String college = collegeEditText.getText().toString().trim();
+    private void registerUser() {
+        String name = nameEditText.getText().toString().trim();
+        String email = emailEditText.getText().toString().trim();
+        String password = passwordEditText.getText().toString().trim();
+        String mobile = mobileEditText.getText().toString().trim();
+        String state = stateSpinner.getSelectedItem().toString();
+        String college = collegeEditText.getText().toString().trim();
 
-            if (name.isEmpty() || email.isEmpty() || password.isEmpty() || mobile.isEmpty()) {
-                Toast.makeText(RegistrationActivity.this, "Please fill all mandatory fields.", Toast.LENGTH_SHORT).show();
-                return;
+        if (name.isEmpty() || email.isEmpty() || password.isEmpty() || mobile.isEmpty()) {
+            Toast.makeText(RegistrationActivity.this, "Please fill all mandatory fields.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (!validateEmail() || !validatePassword() || !validateMobileNumber() || !termsCheckBox.isChecked()) {
+            if (!termsCheckBox.isChecked()) {
+                Toast.makeText(RegistrationActivity.this, "You must agree to the Terms and Conditions.", Toast.LENGTH_SHORT).show();
+                showTermsAndConditionsDialog();
             }
+            return;
+        }
 
-            // Perform final validation before registration
-            if (!validateEmail() || !validatePassword() || !validateMobileNumber() || !termsCheckBox.isChecked()) {
-                if (!termsCheckBox.isChecked()) {
-                    Toast.makeText(RegistrationActivity.this, "You must agree to the Terms and Conditions.", Toast.LENGTH_SHORT).show();
-                }
-                return;
-            }
+        // Show loading animation
+        setLoading(true);
 
-            mAuth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(this, task -> {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(RegistrationActivity.this, "Registration successful.", Toast.LENGTH_SHORT).show();
-                            // Redirect to LoginActivity
-                            Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
-                            startActivity(intent);
-                            finish(); // Finish the current activity to prevent going back
-                        } else {
-                            Toast.makeText(RegistrationActivity.this, "Registration failed.", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-        });
+        // Create Firebase Auth user
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, task -> {
+                    setLoading(false); // Hide loading animation
+                    if (task.isSuccessful()) {
+                        // User registered successfully
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        saveUserToDatabase(user.getUid(), name, email, mobile, state, college);
+                        Toast.makeText(RegistrationActivity.this, "Registration successful.", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        finish(); // Finish the current activity
+                    } else {
+                        // Registration failed
+                        Toast.makeText(RegistrationActivity.this, "Registration failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
 
-        // Handle Back to Login TextView click
-        backToLoginTextView.setOnClickListener(v -> {
-            Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
-            startActivity(intent);
-            finish(); // Finish the current activity to prevent going back
-        });
+    private void saveUserToDatabase(String userId, String name, String email, String mobile, String state, String college) {
+        // Create user object
+        User user = new User(name, email, mobile, state, college);
+
+        // Save user data in Firebase Realtime Database under "Users" node
+        databaseReference.child(userId).setValue(user)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        // Successfully stored user data
+                        Toast.makeText(RegistrationActivity.this, "User data saved.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        // Failed to store user data
+                        Toast.makeText(RegistrationActivity.this, "Failed to save user data.", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     private boolean validateEmail() {
@@ -181,12 +232,28 @@ public class RegistrationActivity extends AppCompatActivity {
         return true;
     }
 
-    public void showTermsPopup(View view) {
-        new AlertDialog.Builder(this)
-                .setTitle("Terms and Conditions")
-                .setMessage(getString(R.string.terms_and_conditions))
-                .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
-                .create()
-                .show();
+    // New method to show/hide loading animation
+    private void setLoading(boolean isLoading) {
+        if (isLoading) {
+            loadingAnimation.setVisibility(View.VISIBLE);
+            registerButton.setEnabled(false);
+        } else {
+            loadingAnimation.setVisibility(View.GONE);
+            registerButton.setEnabled(true);
+        }
+    }
+
+    // New method to show Terms and Conditions dialog
+    private void showTermsAndConditionsDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Terms and Conditions");
+        builder.setMessage(getString(R.string.terms_and_conditions));
+        builder.setPositiveButton("Accept", (dialog, which) -> {
+            termsCheckBox.setChecked(true);
+        });
+        builder.setNegativeButton("Decline", (dialog, which) -> {
+            termsCheckBox.setChecked(false);
+        });
+        builder.show();
     }
 }

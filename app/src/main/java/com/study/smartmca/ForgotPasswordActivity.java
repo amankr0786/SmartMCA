@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class ForgotPasswordActivity extends AppCompatActivity {
@@ -23,6 +24,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     private Runnable timerRunnable;
     private int timerSeconds = 30; // Timer duration in seconds
     private boolean isResendAllowed = true;
+    private LottieAnimationView loadingAnimation; // New loading animation view
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         resetPasswordButton = findViewById(R.id.resetPasswordButton);
         backToLoginTextView = findViewById(R.id.backToLoginTextView);
         timerTextView = findViewById(R.id.timerTextView);
+        loadingAnimation = findViewById(R.id.loadingAnimation); // Initialize loading animation view
 
         // Set up the reset password button click listener
         resetPasswordButton.setOnClickListener(v -> {
@@ -68,8 +71,10 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     }
 
     private void resetPassword(String email) {
+        setLoading(true); // Show loading animation
         mAuth.sendPasswordResetEmail(email)
                 .addOnCompleteListener(this, task -> {
+                    setLoading(false); // Hide loading animation
                     if (task.isSuccessful()) {
                         Toast.makeText(ForgotPasswordActivity.this, "Password reset email sent.", Toast.LENGTH_SHORT).show();
                         startResendTimer();
@@ -103,5 +108,16 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     private void updateTimerText() {
         String timerText = "Wait to Resend link in " + timerSeconds + "s";
         timerTextView.setText(timerText);
+    }
+
+    // New method to show/hide loading animation
+    private void setLoading(boolean isLoading) {
+        if (isLoading) {
+            loadingAnimation.setVisibility(View.VISIBLE);
+            resetPasswordButton.setEnabled(false);
+        } else {
+            loadingAnimation.setVisibility(View.GONE);
+            resetPasswordButton.setEnabled(true);
+        }
     }
 }

@@ -11,6 +11,9 @@
     <color name="colorAccent">#03DAC5</color> <!-- Example color, adjust as needed -->
     <color name="register_text_color">#FF4081</color> <!-- Example color (Pink) -->
     <color name="customButtonColor">#0081DD</color>
+    <color name="backgroundColor">#FFFFFFFF</color>
+    <color name="cardBackground">#FFFFFFFF</color>
+    <color name="colorPrimaryDark">#6200EE</color>
 
 
 

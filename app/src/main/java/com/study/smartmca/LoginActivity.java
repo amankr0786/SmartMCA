@@ -19,6 +19,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -45,8 +46,11 @@ public class LoginActivity extends AppCompatActivity {
     private ImageView showPasswordImageView;
     private ImageButton googleSignInButton;
     private CheckBox rememberMeCheckBox;
+    private LottieAnimationView loadingAnimation;
+
     private FirebaseAuth mAuth;
     private GoogleSignInClient mGoogleSignInClient;
+
     private boolean isPasswordVisible = false;
     private String currentCaptcha;
 
@@ -95,6 +99,7 @@ public class LoginActivity extends AppCompatActivity {
         rememberMeCheckBox = findViewById(R.id.rememberMeCheckBox);
         captchaTextView = findViewById(R.id.captchaTextView);
         googleSignInButton = findViewById(R.id.googleSignInButton);
+        loadingAnimation = findViewById(R.id.loadingAnimation);
     }
 
     private void setupListeners() {
@@ -159,15 +164,18 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
+        setLoading(true);
+
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        setLoading(false);
                         if (task.isSuccessful()) {
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
                         } else {
-                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                            Toast.makeText(LoginActivity.this, "Wrong Email or Password.Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                             updateUI(null);
                         }
@@ -206,6 +214,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void signIn() {
+        setLoading(true);
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
@@ -213,13 +222,13 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuthWithGoogle(account.getIdToken());
             } catch (ApiException e) {
+                setLoading(false);
                 Log.w(TAG, "Google sign in failed", e);
                 Toast.makeText(this, "Google Sign-In failed", Toast.LENGTH_SHORT).show();
             }
@@ -232,6 +241,7 @@ public class LoginActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        setLoading(false);
                         if (task.isSuccessful()) {
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
@@ -252,10 +262,21 @@ public class LoginActivity extends AppCompatActivity {
             editor.putBoolean(PREF_LOGGED_IN, true);
             editor.putBoolean(PREF_REMEMBER_ME, rememberMeCheckBox.isChecked());
             editor.apply();
-
             Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
             startActivity(intent);
             finish();
+        }
+    }
+
+    private void setLoading(boolean isLoading) {
+        if (isLoading) {
+            loadingAnimation.setVisibility(View.VISIBLE);
+            loginButton.setEnabled(false);
+            googleSignInButton.setEnabled(false);
+        } else {
+            loadingAnimation.setVisibility(View.GONE);
+            loginButton.setEnabled(true);
+            googleSignInButton.setEnabled(true);
         }
     }
 }
