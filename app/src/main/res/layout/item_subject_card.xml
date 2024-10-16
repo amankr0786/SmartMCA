@@ -1,0 +1,54 @@
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:layout_margin="8dp"
+    android:elevation="4dp"
+    app:cardCornerRadius="16dp"
+    app:cardBackgroundColor="@color/white">
+
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+android:gravity="center"
+android:padding="16dp">
+
+<!-- Subject Icon -->
+<ImageView
+    android:id="@+id/subjectIconImageView"
+    android:layout_width="70dp"
+    android:layout_height="70dp"
+    android:src="@drawable/ic_subjects"
+    android:contentDescription="Subject Icon"
+    android:scaleType="centerInside" />
+
+<!-- Subject Name -->
+<TextView
+    android:id="@+id/subjectNameTextView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:fontFamily="@font/roboto"
+    android:text="Subject Name"
+    android:textColor="@color/black"
+    android:textSize="15sp"
+    android:gravity="center"
+    android:paddingTop="10dp"
+    android:textStyle="bold" />
+
+<!-- Subject Code -->
+<TextView
+    android:id="@+id/subjectCodeTextView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Course Code: ABC123"
+    android:textSize="12sp"
+    android:textColor="@android:color/holo_red_dark"
+    android:fontFamily="@font/neummontreal_regular"
+    android:textStyle="bold"
+    android:gravity="center"
+    android:paddingTop="8dp" />
+
+</LinearLayout>
+    </androidx.cardview.widget.CardView>

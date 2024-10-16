@@ -1,11 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <resources>
-<!-- Base application theme -->
-<style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-    <!-- Customize your theme here -->
-    <item name="colorPrimary">@color/blue</item>
-    <item name="colorPrimaryDark">@color/blue</item>
-    <item name="colorAccent">@color/pink</item>
-</style>
+    <!-- Base application theme -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Customize your theme here -->
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorPrimaryVariant">@color/blue</item>
+        <item name="colorOnPrimary">@android:color/white</item>
+        <item name="colorSecondary">@color/pink</item>
+        <item name="colorSecondaryVariant">@color/pink</item>
+        <item name="colorOnSecondary">@android:color/white</item>
+    </style>
+
+    <!-- Custom Spinner Style -->
+    <style name="CustomSpinnerStyle" parent="Widget.AppCompat.Spinner">
+        <item name="android:background">@drawable/spinner_dropdown_background</item> <!-- Background drawable -->
+        <item name="android:padding">10dp</item> <!-- Padding for the spinner -->
+        <item name="android:textColor">@android:color/black</item> <!-- Text color -->
+        <item name="android:textSize">16sp</item> <!-- Text size -->
+    </style>
+
+    <!-- Spinner item style -->
+    <style name="SpinnerItem">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">16dp</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:background">@android:color/white</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!-- Dropdown item style -->
+    <style name="SpinnerDropdownItem">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">16dp</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:background">@android:color/white</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!-- Custom style for SearchView -->
+    <style name="CustomSearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <item name="android:textAppearance">@style/CustomQueryHintTextAppearance</item>
+    </style>
+
+    <!-- Custom text appearance for query hint -->
+    <style name="CustomQueryHintTextAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">6sp</item> <!-- Set desired text size -->
+        <item name="android:textColor">@android:color/darker_gray</item> <!-- Optional: Set text color -->
+    </style>
 </resources>

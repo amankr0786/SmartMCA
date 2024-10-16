@@ -46,23 +46,41 @@ dependencies {
     implementation(platform(libs.firebase.bom))
 
     // Add Firebase Realtime Database
-
     implementation(libs.firebase.database)
 
+    // Firebase Authentication (update to latest version)
+    implementation("com.google.firebase:firebase-auth:21.0.1")
+/*    implementation("com.google.firebase:firebase-auth-ktx:21.0.1")*/
 
     // Add Firebase Analytics (optional, if you use analytics)
     implementation(libs.firebase.analytics)
 
-    // Add LoadingButton library (if needed)
-    implementation ("com.airbnb.android:lottie:5.2.0")
-    implementation ("androidx.cardview:cardview:1.0.0")
-    implementation ("de.hdodenhof:circleimageview:3.1.0")
+    // Lottie for animations (LoadingButton)
+    implementation("com.airbnb.android:lottie:5.2.0")
+
+    // Add CardView for UI elements
+    implementation("androidx.cardview:cardview:1.0.0")
+
+    // Add CircleImageView
+    implementation("de.hdodenhof:circleimageview:3.1.0")
+
+    // Material Design components
     implementation("com.google.android.material:material:1.12.0")
 
-    implementation ("androidx.drawerlayout:drawerlayout:1.1.1")   // For DrawerLayout
-    implementation ("androidx.gridlayout:gridlayout:1.0.0")        // For GridLayout if used
+    // DrawerLayout (if used)
+    implementation("androidx.drawerlayout:drawerlayout:1.1.1")
 
+    // GridLayout (if used)
+    implementation("androidx.gridlayout:gridlayout:1.0.0")
 
+    // Glide for image loading
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+
+    // Firebase Storage
+    implementation("com.google.firebase:firebase-storage:20.1.1")
+    implementation(libs.recyclerview)
+
+    // JUnit and Android Test dependencies
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

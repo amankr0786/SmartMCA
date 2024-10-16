@@ -6,6 +6,7 @@
     <string name="logo">SmartMCA Logo</string>
 
     <!-- Other string resources -->
+    <string name="credits_format">Credits: %d</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
     <string name="show_password">Show password</string>
@@ -20,41 +21,68 @@
 
 
     <!-- Add any other strings your app needs -->
-        <!-- Other strings -->
+    <!-- Other strings -->
 
-        <string-array name="indian_states">
-            <item>Andhra Pradesh</item>
-            <item>Arunachal Pradesh</item>
-            <item>Assam</item>
-            <item>Bihar</item>
-            <item>Chhattisgarh</item>
-            <item>Goa</item>
-            <item>Gujarat</item>
-            <item>Haryana</item>
-            <item>Himachal Pradesh</item>
-            <item>Jharkhand</item>
-            <item>Karnataka</item>
-            <item>Kerala</item>
-            <item>Madhya Pradesh</item>
-            <item>Maharashtra</item>
-            <item>Manipur</item>
-            <item>Meghalaya</item>
-            <item>Mizoram</item>
-            <item>Nagaland</item>
-            <item>Odisha</item>
-            <item>Punjab</item>
-            <item>Rajasthan</item>
-            <item>Sikkim</item>
-            <item>Tamil Nadu</item>
-            <item>Telangana</item>
-            <item>Tripura</item>
-            <item>Uttar Pradesh</item>
-            <item>Uttarakhand</item>
-            <item>West Bengal</item>
-        </string-array>
-        <!-- Other string resources -->
+    <string-array name="indian_states">
+        <item>Andhra Pradesh</item>
+        <item>Arunachal Pradesh</item>
+        <item>Assam</item>
+        <item>Bihar</item>
+        <item>Chhattisgarh</item>
+        <item>Goa</item>
+        <item>Gujarat</item>
+        <item>Haryana</item>
+        <item>Himachal Pradesh</item>
+        <item>Jharkhand</item>
+        <item>Karnataka</item>
+        <item>Kerala</item>
+        <item>Madhya Pradesh</item>
+        <item>Maharashtra</item>
+        <item>Manipur</item>
+        <item>Meghalaya</item>
+        <item>Mizoram</item>
+        <item>Nagaland</item>
+        <item>Odisha</item>
+        <item>Punjab</item>
+        <item>Rajasthan</item>
+        <item>Sikkim</item>
+        <item>Tamil Nadu</item>
+        <item>Telangana</item>
+        <item>Tripura</item>
+        <item>Uttar Pradesh</item>
+        <item>Uttarakhand</item>
+        <item>West Bengal</item>
+    </string-array>
+    <!-- Other string resources -->
+    <string name="choose_university">Select University</string>
+    <string-array name="universities_array">
+        <item>@string/choose_university</item>
+        <item>Aligarh Muslim University (AMU), Aligarh</item>
+        <item>Amity University, Noida</item>
+        <item>Anna University, Chennai</item>
+        <item>Banaras Hindu University (BHU), Varanasi</item>
+        <item>Chandigarh University, Chandigarh</item>
+        <item>Christ University, Bangalore</item>
+        <item>Gandhi Engineering College, Bhubaneswar</item>
+        <item>Jamia Millia Islamia, New Delhi</item>
+        <item>Jawaharlal Nehru University (JNU), New Delhi</item>
+        <item>Lovely Professional University (LPU), Phagwara</item>
+        <item>Manipal Academy of Higher Education, Manipal</item>
+        <item>National Institute of Technology (NIT), Tiruchirappalli</item>
+        <item>Savitribai Phule Pune University, Pune</item>
+        <item>SNDT Women\'s University, Mumbai</item>
+        <item>SRM Institute of Science and Technology, Chennai</item>
+        <item>Symbiosis Institute of Computer Studies and Research (SICSR), Pune</item>
+        <item>University of Delhi (DU), New Delhi</item>
+        <item>University of Hyderabad, Hyderabad</item>
+        <item>University of Mumbai, Mumbai</item>
+        <item>Vellore Institute of Technology (VIT), Vellore</item>
 
-        <string name="terms_and_conditions">
+        <!-- Add more universities as needed -->
+    </string-array>
+
+
+    <string name="terms_and_conditions">
 TERMS AND CONDITIONS
 
 Last updated September 11, 2024
@@ -112,8 +140,10 @@ Phone: 9709349703
 amankr0786@gmail.com
         </string>
 
-        <string name="navigation_drawer_open">Open Navigation Drawer</string>
-        <string name="navigation_drawer_close">Close Navigation Drawer</string>
+        <string name="open_drawer">Open Drawer</string>
+        <string name="close_drawer">Close Drawer</string>
+
+
 
 
 </resources>

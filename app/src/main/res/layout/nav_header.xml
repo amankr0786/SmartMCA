@@ -1,23 +1,43 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp"
-    android:background="@color/colorPrimary">
+    android:gravity="bottom"
+    android:background="?attr/colorPrimary"
+    android:orientation="vertical"
+    android:padding="16dp">
 
+    <!-- User Profile Picture -->
     <ImageView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:id="@+id/profile_image"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
         android:src="@drawable/ic_user_profile"
-        android:contentDescription="Profile Image" />
+        android:contentDescription="Profile Picture"
+        android:layout_gravity="center"
+        android:layout_marginBottom="8dp"
+        android:scaleType="centerCrop"
+        />
 
+    <!-- User Name -->
     <TextView
+        android:id="@+id/user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome User"
+        android:text="Guest User"
         android:textColor="@android:color/white"
         android:textSize="18sp"
-        android:layout_marginTop="8dp" />
+        android:fontFamily="@font/nunito"
+        android:layout_gravity="center"/>
+
+    <!-- User Email -->
+    <TextView
+        android:id="@+id/user_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="guest_user@smartmca.com"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        android:fontFamily="@font/nunito"
+        android:layout_gravity="center"/>
 
 </LinearLayout>

@@ -1,5 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.study.smartmca">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -9,9 +15,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <!-- Declare AboutActivity -->
+        <activity
+            android:name=".AboutActivity"
+            android:exported="false" />
+
+        <!-- Declare ProfileActivity -->
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="false" />
+
         <!-- Declare MainActivity as the launcher activity -->
-        <activity android:name=".MainActivity"
-            android:exported="true"> <!-- Specify android:exported -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -19,20 +36,36 @@
         </activity>
 
         <!-- Declare LoginActivity -->
-        <activity android:name=".LoginActivity"
-            android:exported="false" /> <!-- Add android:exported attribute -->
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
 
         <!-- Declare DashboardActivity -->
-        <activity android:name=".DashboardActivity"
+        <activity
+            android:name=".DashboardActivity"
             android:exported="false" />
-        <activity android:name=".RegistrationActivity"
-            android:exported="false" /> <!-- Make sure this entry is included -->
-        <!-- Add android:exported attribute -->
+
+        <!-- Declare UniversityActivity -->
+        <activity
+            android:name=".UniversityActivity"
+            android:exported="false" /> <!-- Ensure it’s declared -->
+
+        <activity android:name=".SubjectDetailActivity" />
+
+
+
+        <!-- Declare RegistrationActivity -->
+        <activity
+            android:name=".RegistrationActivity"
+            android:exported="false" />
+
+        <!-- Declare ForgotPasswordActivity -->
         <activity android:name=".ForgotPasswordActivity" />
+
+        <!-- Meta-data for preloaded fonts -->
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-
     </application>
-    <uses-permission android:name="android.permission.INTERNET" />
+
 </manifest>

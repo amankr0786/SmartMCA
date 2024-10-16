@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
@@ -18,58 +19,107 @@
             android:padding="16dp">
 
             <!-- Top Bar with Menu Button -->
+
+
+            <!-- Modern Search Bar Below the Title -->
             <RelativeLayout
                 android:id="@+id/topBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:background="@drawable/top_bar_gradient">
+                android:background="@drawable/top_bar_gradient"
+                android:padding="8dp">
 
-                <!-- Menu Button -->
-                <ImageButton
-                    android:id="@+id/menuButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_menu"
-                    android:contentDescription="Menu"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:layout_alignParentStart="true"
-                    />
 
                 <!-- Welcome Text -->
                 <TextView
                     android:id="@+id/welcomeTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Welcome to SmartMCA!"
-                    android:textSize="22sp"
+                    android:layout_centerHorizontal="true"
                     android:fontFamily="@font/roboto_medium"
+                    android:text="Welcome to Smart MCA !"
                     android:textColor="@android:color/white"
-                    android:layout_centerHorizontal="true"/>
-
-                <!-- Settings Button -->
-                <ImageButton
-                    android:id="@+id/settingsButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:src="@drawable/ic_settings"
-                    android:contentDescription="@string/settings_button_desc"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    />
+                    android:textSize="16sp" />
             </RelativeLayout>
 
+            <RelativeLayout
+                android:id="@+id/searchContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/topBar"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/search_background"
+                android:padding="2dp">
+
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/searchView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="10sp"
+                    android:queryHint="Search for Study Materials such as PDFs, Videos, Docs, etc."
+                    app:queryHint="Search for Study Materials PDFs, Videos, Docs, etc."
+                    android:iconifiedByDefault="false"
+                    app:iconifiedByDefault="false"
+                    android:queryBackground="@null"
+                    app:theme="@style/CustomSearchViewStyle"
+                    android:background="@null" />
+            </RelativeLayout>
+
+            <View
+                android:id="@+id/dividerBelowSearch"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_below="@id/searchContainer"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/custom_border" />
+
+
+
+            <!-- Modern Divider -->
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_below="@id/universitySpinner"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/custom_border" />
+
+
+            <!-- Spinner for University Selection -->
+
+            <TextView
+                android:id="@+id/chooseUniversityText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/dividerBelowSearch"
+                android:layout_marginTop="25dp"
+                android:fontFamily="@font/roboto"
+                android:gravity="center"
+                android:text="Choose University"
+                android:textColor="@android:color/black"
+                android:textSize="19sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/universitySpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/chooseUniversityText"
+                android:layout_marginTop="22dp"
+                style="@style/CustomSpinnerStyle" />
+
             <!-- Dashboard Grid Layout -->
+
             <GridLayout
                 android:id="@+id/dashboardGrid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/topBar"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="270dp"
                 android:columnCount="2"
-                android:rowCount="6"
                 android:orientation="horizontal"
-                android:padding="8dp">
+                android:padding="8dp"
+                android:rowCount="6">
 
                 <!-- Example of Modern CardView -->
                 <androidx.cardview.widget.CardView
@@ -77,32 +127,31 @@
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:layout_margin="8dp"
+                    app:cardBackgroundColor="@color/cardBackground"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="8dp"
-                    app:cardBackgroundColor="@color/cardBackground">
+                    app:cardElevation="8dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
                         android:gravity="center"
+                        android:orientation="vertical"
                         android:padding="16dp">
 
                         <ImageView
                             android:layout_width="56dp"
                             android:layout_height="56dp"
-                            android:src="@drawable/ic_subjects"
                             android:contentDescription="Subjects Icon"
-                            />
+                            android:src="@drawable/ic_subjects" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
-                            android:text="Subjects"
-                            android:textSize="18sp"
                             android:fontFamily="@font/nunito"
-                            android:textColor="@android:color/black" />
+                            android:text="Subjects"
+                            android:textColor="@android:color/black"
+                            android:textSize="18sp" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -113,32 +162,31 @@
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:layout_margin="8dp"
+                    app:cardBackgroundColor="@color/cardBackground"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="8dp"
-                    app:cardBackgroundColor="@color/cardBackground">
+                    app:cardElevation="8dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
                         android:gravity="center"
+                        android:orientation="vertical"
                         android:padding="16dp">
 
                         <ImageView
                             android:layout_width="56dp"
                             android:layout_height="56dp"
-                            android:src="@drawable/ic_resources"
                             android:contentDescription="Resources Icon"
-                            />
+                            android:src="@drawable/ic_resources" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
-                            android:text="Resources"
-                            android:textSize="18sp"
                             android:fontFamily="@font/nunito"
-                            android:textColor="@android:color/black" />
+                            android:text="Resources"
+                            android:textColor="@android:color/black"
+                            android:textSize="18sp" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -148,32 +196,31 @@
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:layout_margin="8dp"
+                    app:cardBackgroundColor="@color/cardBackground"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="8dp"
-                    app:cardBackgroundColor="@color/cardBackground">
+                    app:cardElevation="8dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
                         android:gravity="center"
+                        android:orientation="vertical"
                         android:padding="16dp">
 
                         <ImageView
                             android:layout_width="56dp"
                             android:layout_height="56dp"
-                            android:src="@drawable/ic_project_idea"
                             android:contentDescription="Project Idea Icon"
-                            />
+                            android:src="@drawable/ic_project_idea" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
-                            android:text="Project Idea"
-                            android:textSize="18sp"
                             android:fontFamily="@font/nunito"
-                            android:textColor="@android:color/black" />
+                            android:text="Project Idea"
+                            android:textColor="@android:color/black"
+                            android:textSize="18sp" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -183,32 +230,31 @@
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:layout_margin="8dp"
+                    app:cardBackgroundColor="@color/cardBackground"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="8dp"
-                    app:cardBackgroundColor="@color/cardBackground">
+                    app:cardElevation="8dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
                         android:gravity="center"
+                        android:orientation="vertical"
                         android:padding="16dp">
 
                         <ImageView
                             android:layout_width="56dp"
                             android:layout_height="56dp"
-                            android:src="@drawable/ic_quiz"
                             android:contentDescription="Quiz Icon"
-                            />
+                            android:src="@drawable/ic_quiz" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
-                            android:text="Quiz"
-                            android:textSize="18sp"
                             android:fontFamily="@font/nunito"
-                            android:textColor="@android:color/black" />
+                            android:text="Quiz"
+                            android:textColor="@android:color/black"
+                            android:textSize="18sp" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -218,32 +264,31 @@
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:layout_margin="8dp"
+                    app:cardBackgroundColor="@color/cardBackground"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="8dp"
-                    app:cardBackgroundColor="@color/cardBackground">
+                    app:cardElevation="8dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
                         android:gravity="center"
+                        android:orientation="vertical"
                         android:padding="16dp">
 
                         <ImageView
                             android:layout_width="56dp"
                             android:layout_height="56dp"
-                            android:src="@drawable/ic_notifications"
                             android:contentDescription="Notifications Icon"
-                            />
+                            android:src="@drawable/ic_notifications" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
-                            android:text="Notifications"
-                            android:textSize="18sp"
                             android:fontFamily="@font/nunito"
-                            android:textColor="@android:color/black" />
+                            android:text="Notifications"
+                            android:textColor="@android:color/black"
+                            android:textSize="18sp" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -253,32 +298,31 @@
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:layout_margin="8dp"
+                    app:cardBackgroundColor="@color/cardBackground"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="8dp"
-                    app:cardBackgroundColor="@color/cardBackground">
+                    app:cardElevation="8dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
                         android:gravity="center"
+                        android:orientation="vertical"
                         android:padding="16dp">
 
                         <ImageView
                             android:layout_width="56dp"
                             android:layout_height="56dp"
-                            android:src="@drawable/ic_study_tools"
                             android:contentDescription="Study Tools Icon"
-                            />
+                            android:src="@drawable/ic_study_tools" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
-                            android:text="Study Tools"
-                            android:textSize="18sp"
                             android:fontFamily="@font/nunito"
-                            android:textColor="@android:color/black" />
+                            android:text="Study Tools"
+                            android:textColor="@android:color/black"
+                            android:textSize="18sp" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -288,32 +332,31 @@
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:layout_margin="8dp"
+                    app:cardBackgroundColor="@color/cardBackground"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="8dp"
-                    app:cardBackgroundColor="@color/cardBackground">
+                    app:cardElevation="8dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
                         android:gravity="center"
+                        android:orientation="vertical"
                         android:padding="16dp">
 
                         <ImageView
                             android:layout_width="56dp"
                             android:layout_height="56dp"
-                            android:src="@drawable/ic_discussion_forum"
                             android:contentDescription="Discussion Forum Icon"
-                            />
+                            android:src="@drawable/ic_discussion_forum" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
-                            android:text="Discussion Forum"
-                            android:textSize="18sp"
                             android:fontFamily="@font/nunito"
-                            android:textColor="@android:color/black" />
+                            android:text="Discussion Forum"
+                            android:textColor="@android:color/black"
+                            android:textSize="18sp" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -323,32 +366,31 @@
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:layout_margin="8dp"
+                    app:cardBackgroundColor="@color/cardBackground"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="8dp"
-                    app:cardBackgroundColor="@color/cardBackground">
+                    app:cardElevation="8dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
                         android:gravity="center"
+                        android:orientation="vertical"
                         android:padding="16dp">
 
                         <ImageView
                             android:layout_width="56dp"
                             android:layout_height="56dp"
-                            android:src="@drawable/ic_career_resources"
                             android:contentDescription="Career Resources Icon"
-                            />
+                            android:src="@drawable/ic_career_resources" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
-                            android:text="Career Resources"
-                            android:textSize="18sp"
                             android:fontFamily="@font/nunito"
-                            android:textColor="@android:color/black" />
+                            android:text="Career Resources"
+                            android:textColor="@android:color/black"
+                            android:textSize="18sp" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -358,32 +400,31 @@
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:layout_margin="8dp"
+                    app:cardBackgroundColor="@color/cardBackground"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="8dp"
-                    app:cardBackgroundColor="@color/cardBackground">
+                    app:cardElevation="8dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
                         android:gravity="center"
+                        android:orientation="vertical"
                         android:padding="16dp">
 
                         <ImageView
                             android:layout_width="56dp"
                             android:layout_height="56dp"
-                            android:src="@drawable/ic_profile"
                             android:contentDescription="Profile and Settings Icon"
-                            />
+                            android:src="@drawable/ic_profile" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
-                            android:text="Profile Settings"
-                            android:textSize="18sp"
                             android:fontFamily="@font/nunito"
-                            android:textColor="@android:color/black" />
+                            android:text="Profile Settings"
+                            android:textColor="@android:color/black"
+                            android:textSize="18sp" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -393,32 +434,31 @@
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:layout_margin="8dp"
+                    app:cardBackgroundColor="@color/cardBackground"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="8dp"
-                    app:cardBackgroundColor="@color/cardBackground">
+                    app:cardElevation="8dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
                         android:gravity="center"
+                        android:orientation="vertical"
                         android:padding="16dp">
 
                         <ImageView
                             android:layout_width="56dp"
                             android:layout_height="56dp"
-                            android:src="@drawable/ic_networking"
                             android:contentDescription="Networking Icon"
-                            />
+                            android:src="@drawable/ic_networking" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
-                            android:text="Networking"
-                            android:textSize="18sp"
                             android:fontFamily="@font/nunito"
-                            android:textColor="@android:color/black" />
+                            android:text="Networking"
+                            android:textColor="@android:color/black"
+                            android:textSize="18sp" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -428,32 +468,31 @@
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:layout_margin="8dp"
+                    app:cardBackgroundColor="@color/cardBackground"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="8dp"
-                    app:cardBackgroundColor="@color/cardBackground">
+                    app:cardElevation="8dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
                         android:gravity="center"
+                        android:orientation="vertical"
                         android:padding="16dp">
 
                         <ImageView
                             android:layout_width="56dp"
                             android:layout_height="56dp"
-                            android:src="@drawable/ic_news_updates"
                             android:contentDescription="News and Updates Icon"
-                            />
+                            android:src="@drawable/ic_news_updates" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
-                            android:text="News and Updates"
-                            android:textSize="18sp"
                             android:fontFamily="@font/nunito"
-                            android:textColor="@android:color/black" />
+                            android:text="News and Updates"
+                            android:textColor="@android:color/black"
+                            android:textSize="18sp" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -463,32 +502,31 @@
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:layout_margin="8dp"
+                    app:cardBackgroundColor="@color/cardBackground"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="8dp"
-                    app:cardBackgroundColor="@color/cardBackground">
+                    app:cardElevation="8dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
                         android:gravity="center"
+                        android:orientation="vertical"
                         android:padding="16dp">
 
                         <ImageView
                             android:layout_width="56dp"
                             android:layout_height="56dp"
-                            android:src="@drawable/ic_feedback"
                             android:contentDescription="Feedback System Icon"
-                            />
+                            android:src="@drawable/ic_feedback" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
-                            android:text="Feedback System"
-                            android:textSize="18sp"
                             android:fontFamily="@font/nunito"
-                            android:textColor="@android:color/black" />
+                            android:text="Feedback System"
+                            android:textColor="@android:color/black"
+                            android:textSize="18sp" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -496,19 +534,19 @@
 
             </GridLayout>
 
-            <!-- Logout Button with Gradient Background -->
-            <Button
-                android:id="@+id/logoutButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/dashboardGrid"
-                android:layout_marginTop="24dp"
-                android:text="Logout"
-                android:textColor="@android:color/white"
-                android:textSize="16sp"
-                android:fontFamily="@font/roboto_bold"
-                android:background="@drawable/button_gradient"
-                android:elevation="6dp"/>
+            <!--            &lt;!&ndash; Logout Button with Gradient Background &ndash;&gt;
+                        <Button
+                            android:id="@+id/menu_logout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/dashboardGrid"
+                            android:layout_marginTop="24dp"
+                            android:text="Logout"
+                            android:textColor="@android:color/white"
+                            android:textSize="16sp"
+                            android:fontFamily="@font/roboto_bold"
+                            android:background="@drawable/button_gradient"
+                            android:elevation="6dp"/>-->
 
         </RelativeLayout>
     </ScrollView>
@@ -521,6 +559,6 @@
         android:layout_gravity="start"
         android:background="@android:color/white"
         app:headerLayout="@layout/nav_header"
-        app:menu="@menu/drawer_menu" />
+        app:menu="@menu/dashboard_menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

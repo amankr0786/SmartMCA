@@ -22,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.airbnb.lottie.LottieAnimationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -176,11 +177,27 @@ public class RegistrationActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         // User registered successfully
                         FirebaseUser user = mAuth.getCurrentUser();
-                        saveUserToDatabase(user.getUid(), name, email, mobile, state, college);
-                        Toast.makeText(RegistrationActivity.this, "Registration successful.", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
-                        startActivity(intent);
-                        finish(); // Finish the current activity
+
+                        if (user != null) {
+                            // Update the FirebaseUser profile with the display name
+                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                    .setDisplayName(name) // Set the user's name
+                                    .build();
+
+                            user.updateProfile(profileUpdates).addOnCompleteListener(profileTask -> {
+                                if (profileTask.isSuccessful()) {
+                                    // Successfully updated user profile
+                                    saveUserToDatabase(user.getUid(), name, email, mobile, state, college);
+                                    Toast.makeText(RegistrationActivity.this, "Registration successful.", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
+                                    startActivity(intent);
+                                    finish(); // Finish the current activity
+                                } else {
+                                    Toast.makeText(RegistrationActivity.this, "Failed to update profile.", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+
                     } else {
                         // Registration failed
                         Toast.makeText(RegistrationActivity.this, "Registration failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -232,7 +249,7 @@ public class RegistrationActivity extends AppCompatActivity {
         return true;
     }
 
-    // New method to show/hide loading animation
+    // New method to handle loading animation visibility
     private void setLoading(boolean isLoading) {
         if (isLoading) {
             loadingAnimation.setVisibility(View.VISIBLE);
@@ -243,7 +260,8 @@ public class RegistrationActivity extends AppCompatActivity {
         }
     }
 
-    // New method to show Terms and Conditions dialog
+
+// New method to show Terms and Conditions dialog
     private void showTermsAndConditionsDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Terms and Conditions");

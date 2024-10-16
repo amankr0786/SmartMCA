@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+<!--    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_home"
+        android:title="Home" />-->
+    <item
+        android:id="@+id/menu_profile"
+        android:title="Profile"
+        android:icon="@drawable/ic_profile_icon" /> <!-- Replace with a valid drawable -->
+
+  <!-- Replace with a valid drawable -->
+
+    <item
+        android:id="@+id/menu_settings"
+        android:title="Settings"
+        android:icon="@drawable/ic_settings_icon" />
+    <item
+        android:id="@+id/menu_about"
+        android:title="About"
+        android:icon="@drawable/ic_about_icon" />
+    <item
+        android:id="@+id/menu_logout"
+        android:icon="@drawable/ic_logout_icon"
+        android:title="Logout" /><!-- Replace with a valid drawable -->
+
+
+
+</menu>

@@ -267,7 +267,7 @@
             android:layout_marginTop="8dp"
             android:text="Register"
             android:textColor="@android:color/white"
-            android:background="@drawable/button_rounded_background"
+            android:background="@drawable/button_gradient"
             android:padding="12dp" />
 
         <!-- Back to Login TextView -->

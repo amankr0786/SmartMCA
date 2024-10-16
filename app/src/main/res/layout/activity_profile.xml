@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <!-- Loading Animation -->
+        <ImageView
+            android:id="@+id/logoImageView"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="16dp"
+            android:contentDescription="@string/logo_description"
+            android:scaleType="fitCenter"
+            android:src="@drawable/logo" />
+
+        <!-- Title TextView -->
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:fontFamily="@font/nunito"
+            android:text="Update Profile"
+            android:textColor="@color/customButtonColor"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:gravity="center" />
+
+        <!-- Subtitle TextView -->
+        <TextView
+            android:id="@+id/descriptionTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:text="You can update your profile details."
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:gravity="center" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/loadingAnimation"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="16dp"
+            android:visibility="gone"
+            app:lottie_autoPlay="true"
+            app:lottie_rawRes="@raw/loading_animation"
+            app:lottie_loop="true" />
+
+        <!-- Name Field with Save Button -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            android:gravity="center_vertical">
+
+            <EditText
+                android:id="@+id/nameEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Enter your name"
+                android:inputType="textPersonName"
+                android:fontFamily="@font/nunito"
+                android:padding="12dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/edittext_rounded_background"
+                android:layout_marginEnd="8dp"/>
+
+            <Button
+                android:id="@+id/saveNameButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Save"
+                android:visibility="gone"
+                android:layout_marginStart="8dp"
+                android:backgroundTint="@color/colorAccent"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+
+        <!-- Email Field with Save Button -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            android:gravity="center_vertical">
+
+            <EditText
+                android:id="@+id/emailEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Enter your email"
+                android:inputType="textEmailAddress"
+                android:fontFamily="@font/nunito"
+                android:padding="12dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/edittext_rounded_background"
+                android:layout_marginEnd="8dp"/>
+
+            <Button
+                android:id="@+id/saveEmailButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Save"
+                android:visibility="gone"
+                android:layout_marginStart="8dp"
+                android:backgroundTint="@color/colorAccent"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+
+        <!-- Mobile Field with Save Button -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            android:gravity="center_vertical">
+
+            <EditText
+                android:id="@+id/mobileEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Enter your mobile number"
+                android:inputType="phone"
+                android:fontFamily="@font/nunito"
+                android:padding="12dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/edittext_rounded_background"
+                android:layout_marginEnd="8dp"/>
+
+            <Button
+                android:id="@+id/saveMobileButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Save"
+                android:visibility="gone"
+                android:layout_marginStart="8dp"
+                android:backgroundTint="@color/colorAccent"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+
+        <!-- College Field with Save Button -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            android:gravity="center_vertical">
+
+            <EditText
+                android:id="@+id/collegeEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Enter your college name"
+                android:inputType="text"
+                android:fontFamily="@font/nunito"
+                android:padding="12dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/edittext_rounded_background"
+                android:layout_marginEnd="8dp"/>
+
+            <Button
+                android:id="@+id/saveCollegeButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Save"
+                android:visibility="gone"
+                android:layout_marginStart="8dp"
+                android:backgroundTint="@color/colorAccent"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+
+        <!-- State Spinner -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="State"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="center" />
+
+        <Spinner
+            android:id="@+id/stateSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:spinnerMode="dropdown"
+            android:fontFamily="@font/nunito"
+            android:background="@drawable/edittext_rounded_background"
+            android:padding="12dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp" />
+
+        <Button
+            android:id="@+id/saveStateButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:visibility="gone"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/colorAccent"
+            android:textColor="@android:color/white" />
+
+        <!-- Update Profile Button -->
+        <Button
+            android:id="@+id/updateProfileButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Update Profile"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/top_bar_gradient"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+</ScrollView>

@@ -54,9 +54,9 @@ public class LoginActivity extends AppCompatActivity {
     private boolean isPasswordVisible = false;
     private String currentCaptcha;
 
-    private static final String PREFS_NAME = "SmartMCA_Prefs";
+    public static final String PREFS_NAME = "SmartMCA_Prefs";
     private static final String PREF_LOGGED_IN = "isLoggedIn";
-    private static final String PREF_REMEMBER_ME = "rememberMe";
+    public static final String PREF_REMEMBER_ME = "rememberMe";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +82,11 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         boolean rememberMe = preferences.getBoolean(PREF_REMEMBER_ME, false);
         rememberMeCheckBox.setChecked(rememberMe);
+
+        // Auto-login if "Remember Me" was checked
+        if (rememberMe) {
+            autoLogin(preferences);
+        }
 
         // Real-time Email Validation
         setupEmailValidation();
@@ -109,6 +114,14 @@ public class LoginActivity extends AppCompatActivity {
         forgotPasswordTextView.setOnClickListener(v -> navigateToForgotPassword());
         refreshCaptchaButton.setOnClickListener(v -> refreshCaptcha());
         googleSignInButton.setOnClickListener(v -> signIn());
+    }
+
+    private void autoLogin(SharedPreferences preferences) {
+        String email = preferences.getString("email", "");
+        String password = preferences.getString("password", "");
+        emailEditText.setText(email);
+        passwordEditText.setText(password);
+        attemptLogin();
     }
 
     private void setupEmailValidation() {
@@ -173,11 +186,29 @@ public class LoginActivity extends AppCompatActivity {
                         setLoading(false);
                         if (task.isSuccessful()) {
                             FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
+                            if (user != null) {
+                                // Save "Remember Me" state
+                                SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+                                SharedPreferences.Editor editor = preferences.edit();
+                                editor.putBoolean(PREF_REMEMBER_ME, rememberMeCheckBox.isChecked());
+                                if (rememberMeCheckBox.isChecked()) {
+                                    editor.putString("email", email);
+                                    editor.putString("password", password);
+                                } else {
+                                    editor.remove("email");
+                                    editor.remove("password");
+                                }
+                                editor.apply();
+
+                                // Pass the user's name to the DashboardActivity
+                                Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+                                intent.putExtra("USER_NAME", user.getDisplayName());  // Pass the name
+                                startActivity(intent);
+                                finish();
+                            }
                         } else {
-                            Toast.makeText(LoginActivity.this, "Wrong Email or Password.Authentication failed.",
+                            Toast.makeText(LoginActivity.this, "Invalid Email or Password. Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
-                            updateUI(null);
                         }
                     }
                 });
@@ -226,46 +257,34 @@ public class LoginActivity extends AppCompatActivity {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
-                firebaseAuthWithGoogle(account.getIdToken());
+                firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
-                setLoading(false);
                 Log.w(TAG, "Google sign in failed", e);
-                Toast.makeText(this, "Google Sign-In failed", Toast.LENGTH_SHORT).show();
+                setLoading(false);
             }
         }
     }
 
-    private void firebaseAuthWithGoogle(String idToken) {
-        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
+    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        setLoading(false);
-                        if (task.isSuccessful()) {
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
-                        } else {
-                            Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            updateUI(null);
+                .addOnCompleteListener(this, task -> {
+                    setLoading(false);
+                    if (task.isSuccessful()) {
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        if (user != null) {
+                            // Get the user's display name and pass to DashboardActivity
+                            String userName = user.getDisplayName();
+                            Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+                            intent.putExtra("USER_NAME", userName);  // Pass the name
+                            startActivity(intent);
+                            finish();
                         }
+                    } else {
+                        Toast.makeText(LoginActivity.this, "Google sign-in failed.",
+                                Toast.LENGTH_SHORT).show();
                     }
                 });
-    }
-
-    private void updateUI(FirebaseUser user) {
-        if (user != null) {
-            SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.putBoolean(PREF_LOGGED_IN, true);
-            editor.putBoolean(PREF_REMEMBER_ME, rememberMeCheckBox.isChecked());
-            editor.apply();
-            Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
-            startActivity(intent);
-            finish();
-        }
     }
 
     private void setLoading(boolean isLoading) {
